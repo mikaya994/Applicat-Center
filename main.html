@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ApplicationConnect Center</title>
+
+<style>
+:root {
+    --bg-card: rgba(255,255,255,0.92);
+    --text-color: #111;
+    --primary: #0a66ff;
+}
+
+body.dark {
+    --bg-card: rgba(20,20,20,0.92);
+    --text-color: #f2f2f2;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    color: var(--text-color);
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("coding-1853305.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* HEADER */
+header {
+    background: var(--bg-card);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    margin: 0;
+    color: var(--primary);
+}
+
+.controls button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: var(--primary);
+    color: #fff;
+    font-weight: bold;
+}
+
+/* MAIN */
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.intro {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.card h3 {
+    color: var(--primary);
+}
+
+/* APPLY BOX */
+.apply-box {
+    margin: 60px 0;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    background: linear-gradient(135deg, #0a66ff, #00c6ff);
+    color: #fff;
+}
+
+.apply-box a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 30px;
+    background: #fff;
+    color: #0a66ff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-card);
+    padding: 30px;
+    text-align: center;
+}
+
+.whatsapp a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 24px;
+    background: #25D366;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>ApplicationConnect Center 🔆🔆</h1>
+    <div class="controls">
+        <button onclick="toggleTheme()">💡 </button>
+        <button onclick="toggleLang()">KIS / ENG</button>
+    </div>
+</header>
+
+<main>
+    <div class="intro">
+        <h2 id="title">Karibu ApplicationConnect Center</h2>
+        <p id="desc">
+            Tunatoa huduma bora za kidigitali kwa haraka, usalama na uaminifu popote ulipo.
+        </p>
+    </div>
+
+    <div class="services">
+        <div class="card">
+            <h3 id="serviceTitle">Huduma Zinazopatikana</h3>
+            <ul id="servicesList"></ul>
+        </div>
+
+        <div class="card">
+            <h3 id="nearTitle">Huduma za Karibu</h3>
+            <ul id="nearList"></ul>
+        </div>
+
+        <div class="card">
+            <h3 id="pcTitle">Uuzaji wa Computer</h3>
+            <p id="pcText"></p>
+        </div>
+    </div>
+
+    <div class="apply-box">
+        <h2>Visit for Application</h2>
+        <p>Bofya hapa kufanya application zako zote kwa urahisi</p>
+        <a href="https://digital-gateway-point-c4oj.vercel.app" target="_blank">
+            Visit for Application
+        </a>
+    </div>
+</main>
+
+<footer>
+    <h3 id="contactTitle">Wasiliana Nasi</h3>
+    <div class="whatsapp">
+        <a href="https://wa.me/255749755206" target="_blank">WhatsApp Max</a>
+        <a href="https://wa.me/255763495509" target="_blank">WhatsApp Mwantegano</a>
+    </div>
+    <p>© 2026 ApplicationConnect Center.All rights reserved</p>
+</footer>
+
+<script>
+let sw = true;
+
+const servicesSW = [
+ "TIN Number","Leseni ya Biashara","Vyeti vya Vizazi na Vifo",
+ "Photoshop (Poster, Logo, Editing)","NAPA Reference Number",
+ "University Application","Loan (HESLB) Application","Loss Report",
+ "BRELA ORS","AJIRA Portal","NIDA Online","Kuandika C.V","Passport 🛂"
+];
+
+const servicesEN = [
+ "TIN Number","Business License","Birth & Death Certificates",
+ "Photoshop (Poster, Logo, Image Editing)","NAPA Reference Number",
+ "University Application","Student Loan (HESLB) Application","Loss Report",
+ "BRELA ORS","AJIRA Portal","NIDA Online","CV Writing","Passport 🛂"
+];
+
+const nearSW = [
+ "LIPA kwa Simu","Computer Software Troubleshooting",
+ "Computer OS Installation","Na huduma nyingine nyingi za kidigitali"
+];
+
+const nearEN = [
+ "Mobile Payments","Computer Software Troubleshooting",
+ "Operating System Installation","Many other digital services"
+];
+
+function loadContent() {
+    const sList = document.getElementById("servicesList");
+    const nList = document.getElementById("nearList");
+    sList.innerHTML = "";
+    nList.innerHTML = "";
+
+    const sData = sw ? servicesSW : servicesEN;
+    const nData = sw ? nearSW : nearEN;
+
+    sData.forEach(i => {
+        let li = document.createElement("li");
+        li.textContent = i;
+        sList.appendChild(li);
+    });
+
+    nData.forEach(i => {
+        let li = document.createElement("li");
+        li.textContent = i;
+        nList.appendChild(li);
+    });
+
+    document.getElementById("title").innerText =
+        sw ? "Karibu ApplicationConnect Center" : "Welcome to ApplicationConnect Center";
+
+    document.getElementById("desc").innerText =
+        sw
+        ? "Tunatoa huduma bora za kidigitali kwa haraka, usalama na uaminifu popote ulipo."
+        : "We provide fast, secure and reliable digital services wherever you are.";
+
+    document.getElementById("serviceTitle").innerText =
+        sw ? "Huduma Zinazopatikana" : "Available Digital Services";
+
+    document.getElementById("nearTitle").innerText =
+        sw ? "Huduma za Karibu" : "Nearby Services";
+
+    document.getElementById("pcTitle").innerText =
+        sw ? "Uuzaji wa Computer" : "Computer Sales";
+
+    document.getElementById("pcText").innerHTML =
+        sw
+        ? "Tunauza PC aina zote <br> Bei kuanzia <b>350,000 – 3,000,000 Tsh</b><br> Tunasafirisha popote ulipo"
+        : "We sell all types of PCs <br> Prices from <b>350,000 – 3,000,000 Tsh</b><br> Nationwide delivery available";
+
+    document.getElementById("contactTitle").innerText =
+        sw ? "Wasiliana Nasi" : "Contact Us";
+}
+
+function toggleLang() {
+    sw = !sw;
+    loadContent();
+}
+
+function toggleTheme() {
+    document.body.classList.toggle("dark");
+}
+
+loadContent();
+</script>
+
+</body>
+</html>
